@@ -48,13 +48,25 @@ class SchoolManagementSystem:
         else:
             print(f"Student with ID {student_id} not found.")
 
+    def view_by_id(self, student_id):
+        if student_id in self.students:
+            student = self.students[student_id]
+
+            print("\n--- Student Details ---")
+            print("ID:", student.student_id)
+            print("Name:", student.name)
+            print("Grade:", student.grade)
+        else:
+            print("Student not found.")
+
     def display_menu(self):
         print("\n--- School Management System Menu ---")
         print("1. Add Student")
-        print("2. View Students")
+        print("2. View All Students")
         print("3. Update Student")
-        print("4. Delete Student")
-        print("5. Exit")
+        print("4. View Student by ID")
+        print("5. Delete Student")
+        print("6. Exit")
         print("-------------------------------------")
 
     def run(self):
@@ -89,17 +101,23 @@ class SchoolManagementSystem:
                         print(f"Student with ID {student_id} not found.")
                 except ValueError:
                     print("Invalid input. Please enter a number for student ID.")
-            elif choice == '4':
+            elif choice == '4': # View Student by ID
+                try:
+                    student_id = int(input("Enter student ID to view: "))
+                    self.view_by_id(student_id)
+                except ValueError:
+                    print("Invalid input. Please enter a number for student ID.")
+            elif choice == '5': # Delete Student
                 try:
                     student_id = int(input("Enter student ID to delete: "))
                     self.delete_student(student_id)
                 except ValueError:
                     print("Invalid input. Please enter a number for student ID.")
-            elif choice == '5':
+            elif choice == '6': # Exit
                 print("Exiting School Management System. Goodbye!")
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("Invalid choice. Please try again later.")
 
 if __name__ == "__main__":
     sms = SchoolManagementSystem()
